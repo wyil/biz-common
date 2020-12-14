@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+	<!-- <parent>
+		<groupId>com.aspire.tmmp</groupId>
+		<artifactId>tmmp-parent</artifactId>
+		<version>1.0.0.0-SNATHOST</version>
+	</parent> -->
+
+	<groupId>com.aspire.temmp</groupId>
+	<artifactId>biz-common</artifactId>
+	<name>biz-common</name>
+	<url>http://maven.apache.org</url>
+	<packaging>jar</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.9.2</version><!--$NO-MVN-MAN-VER$-->
+		</dependency>
+
+
+		<!-- spring boot -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
+		<!-- webbas 相关包 -->
+		<!-- <dependency>
+			<groupId>com.aspire.webbas</groupId>
+			<artifactId>webbas-common-sessionuser</artifactId>
+			<version>3.2.5.001</version>
+		</dependency>
+		<dependency>
+			<groupId>com.aspire.webbas</groupId>
+			<artifactId>webbas-common-configurer</artifactId>
+			<version>${webbas.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>com.aspire.webbas</groupId>
+            <artifactId>webbas-support-log-starter</artifactId>
+            <version>${webbas.version}</version>
+        </dependency> -->
+
+	</dependencies>
+</project>

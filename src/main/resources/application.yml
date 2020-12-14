@@ -1,0 +1,4 @@
+
+currentUser.from: release  # 本地nginx页面调试，不需要跟webbas配合时，配置为local
+#切面日志信息开关配置
+operation.log.on: true
