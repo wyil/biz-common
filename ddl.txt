@@ -1,0 +1,64 @@
+CREATE TABLE `wb_dict` (
+  `id` varchar(32) NOT NULL COMMENT '标识',
+  `dict_type` varchar(50) NOT NULL COMMENT '类型',
+  `CODE` varchar(30) NOT NULL COMMENT '代码',
+  `name` varchar(50) NOT NULL COMMENT '名称',
+  `status` char(1) DEFAULT '1' COMMENT '状态:COMMON_status字典',
+  `description` varchar(300) DEFAULT NULL COMMENT '备注',
+  `create_user` bigint DEFAULT NULL COMMENT '操作员',
+  `create_user_name` varchar(50) DEFAULT NULL COMMENT '创建人名称',
+  `create_date` datetime DEFAULT NULL COMMENT '入库时间',
+  `last_update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `order_key` int DEFAULT NULL COMMENT '每类字典的排序',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQUE_IDX_TYPE_CODE` (`dict_type`,`CODE`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='静态字典表';
+
+-- tmmp_it.wb_dict_type definition
+
+CREATE TABLE `wb_dict_type` (
+  `code` varchar(50) NOT NULL COMMENT '类型',
+  `name` varchar(50) DEFAULT NULL COMMENT '名称',
+  `domain` varchar(20) DEFAULT NULL COMMENT '领域',
+  `cn_spell` varchar(50) DEFAULT NULL COMMENT '拼音码',
+  `description` varchar(300) DEFAULT NULL COMMENT '备注',
+  `create_user` bigint DEFAULT NULL COMMENT '操作员',
+  `create_user_name` varchar(50) DEFAULT NULL COMMENT '创建人名称',
+  `create_date` datetime DEFAULT NULL COMMENT '入库时间',
+  `last_update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='静态字典类型表';
+
+-- tmmp_it.wb_log definition
+
+CREATE TABLE `wb_log` (
+  `id` varchar(64) NOT NULL COMMENT '业务日志ID',
+  `log_type` varchar(32) NOT NULL COMMENT '日志类型',
+  `operator_id` varchar(64) NOT NULL COMMENT '操作员ID',
+  `operator_name` varchar(64) NOT NULL COMMENT '操作员名称',
+  `client_ip` varchar(100) NOT NULL COMMENT '客户端IP',
+  `business_id` varchar(64) NOT NULL COMMENT '被操作实体ID',
+  `business_name` varchar(100) NOT NULL COMMENT '被操作实体名称',
+  `description` text NOT NULL COMMENT '操作说明',
+  `operation_result` varchar(400) NOT NULL COMMENT '操作结果',
+  `operation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '操作时间',
+  `business_type` varchar(32) NOT NULL COMMENT '被操作实体类型',
+  `operation_domain` varchar(32) NOT NULL COMMENT '操作所属域（admin,sp）',
+  `organization_id` varchar(64) DEFAULT NULL COMMENT '日志所属机构',
+  `division_id` varchar(64) DEFAULT NULL COMMENT '日志所属地区',
+  PRIMARY KEY (`id`),
+  KEY `IDX_WB_LOG_TYPE` (`log_type`),
+  KEY `IDX_WB_LOG_DATE` (`operation_date`),
+  KEY `IDX_WB_LOG_OPR_ID` (`operator_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='业务日志';
+
+
+-- tmmp_it.wb_log_type definition
+
+CREATE TABLE `wb_log_type` (
+  `TYPE` varchar(20) NOT NULL COMMENT '日志类型',
+  `name` varchar(50) NOT NULL COMMENT '日志类型名称',
+  `p_type` varchar(32) NOT NULL COMMENT '日志类型的父节点',
+  `pattern` varchar(500) NOT NULL COMMENT '日志操作说明模式字符串（采用java字符串的format格式）',
+  PRIMARY KEY (`TYPE`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='日志类型';
