@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="ApprovalConfigMapper">
+	<typeAlias alias="ApprovalConfigClass" type="com.aspire.sims.qm.workflow.domain.ApprovalConfig" />
+	<resultMap id="ApprovalConfigMapper_BaseResultMap" class="ApprovalConfigClass">
+		<!-- WARNING - @mbg.generated -->
+		<result column="id" jdbcType="VARCHAR" property="id" />
+        <result column="flow_key" jdbcType="VARCHAR" property="flowKey" />
+        <result column="approval_node" jdbcType="VARCHAR" property="approvalNode" />
+        <result column="node_desc" jdbcType="VARCHAR" property="nodeDesc" />
+        <result column="node_condition" jdbcType="VARCHAR" property="nodeCondition" />
+        <result column="user_bean_id" jdbcType="VARCHAR" property="userBeanId" />
+        <result column="handler_bean_id" jdbcType="VARCHAR" property="handlerBeanId" />
+        <result column="notify_bean_id" jdbcType="VARCHAR" property="notifyBeanId" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+	</resultMap>
+
+	<select id="findByFlowKey" resultMap="ApprovalConfigMapper.ApprovalConfigMapper_BaseResultMap"
+        parameterClass="String">
+        SELECT id, flow_key, approval_node, node_desc, node_condition, user_bean_id, handler_bean_id,
+        notify_bean_id, create_time,
+        update_time
+        FROM qm_approval_config
+        where flow_key=#flowKey#
+    </select>
+
+    <select id="findByFlowKeyAndNode" resultMap="ApprovalConfigMapper.ApprovalConfigMapper_BaseResultMap"
+        parameterClass="java.util.Map">
+        SELECT id, flow_key, approval_node, node_desc, node_condition, user_bean_id, handler_bean_id,
+        notify_bean_id, create_time,
+        update_time
+        FROM qm_approval_config
+        where flow_key=#flowKey# and
+        approval_node=#approvalNode#
+    </select>
+
+</sqlMap>

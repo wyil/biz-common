@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="ApprovalDataMapper">
+	<typeAlias alias="ApprovalDataClass" type="com.aspire.sims.qm.workflow.domain.ApprovalData" />
+	<resultMap id="ApprovalDataMapper_BaseResultMap" class="ApprovalDataClass">
+		<!-- WARNING - @mbg.generated -->
+		<result column="id" jdbcType="VARCHAR" property="id" />
+		<result column="flow_key" jdbcType="VARCHAR" property="flowKey" />
+		<result column="business_id" jdbcType="VARCHAR" property="businessId" />
+		<result column="flow_node" jdbcType="VARCHAR" property="flowNode" />
+		<result column="approval_action" jdbcType="VARCHAR" property="approvalAction" />
+		<result column="opinion" jdbcType="VARCHAR" property="opinion" />
+		<result column="json_data" jdbcType="VARCHAR" property="jsonData" />
+		<result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+		<result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="update_user_id" jdbcType="VARCHAR" property="updateUserId" />
+		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+		<result column="deleted" jdbcType="VARCHAR" property="deleted" />
+	</resultMap>
+
+	<select id="get" resultMap="ApprovalDataMapper_BaseResultMap" parameterClass="ApprovalDataClass">
+		SELECT id, flow_key, business_id,
+		flow_node, approval_action, opinion, json_data, create_user_id, create_user_name, create_time,
+		update_user_id,
+		update_time,
+		deleted
+		FROM qm_approval_data
+		where flow_key=#flowKey# and business_id=#businessId# and flow_node=#flowNode#
+	</select>
+	
+	<select id="getById" resultMap="ApprovalDataMapper_BaseResultMap" parameterClass="string">
+        SELECT id, flow_key, business_id,
+        flow_node, approval_action, opinion, json_data, create_user_id, create_user_name, create_time,
+        update_user_id,
+        update_time,
+        deleted
+        FROM qm_approval_data
+        where id=#id# 
+    </select>
+
+	<update id="update" parameterClass="ApprovalDataClass">
+		update qm_approval_data set
+		approval_action=#approvalAction#,
+		opinion=#opinion#,
+		json_data=#jsonData#,
+		update_user_id=#updateUserId#,
+		update_time=#updateTime#
+		where id=#id#
+	</update>
+
+	<delete id="delete" parameterClass="string">
+		delete FROM qm_approval_data where id=#id#
+	</delete>
+
+	<insert id="insert" parameterClass="ApprovalDataClass">
+		INSERT INTO qm_approval_data
+		(id, flow_key, business_id, flow_node,
+		approval_action, opinion, json_data,
+		create_user_id, create_user_name, create_time,update_user_id,update_time, deleted)
+		VALUES(#id#, #flowKey#, #businessId#, #flowNode#,
+		#approvalAction#, #opinion#, #jsonData#,
+		#createUserId#,
+		#createUserName#, #createTime#,#updateUserId# ,#updateTime# ,#deleted#)
+	</insert>
+
+	<select id="listByFlowKeyAndBusinessId" resultMap="ApprovalDataMapper.ApprovalDataMapper_BaseResultMap">
+		select id, flow_key, business_id, flow_node, approval_action, opinion, json_data, create_user_id, create_user_name,
+		create_time, update_user_id, update_time, deleted
+		from qm_approval_data
+		where deleted='0' and flow_key=#flowKey# and business_id=#businessId#
+	</select>
+</sqlMap>

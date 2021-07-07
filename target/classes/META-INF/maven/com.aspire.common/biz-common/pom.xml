@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.1.4.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<groupId>com.aspire.common</groupId>
@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
-			<version>1.9.2</version><!--$NO-MVN-MAN-VER$-->
+			<version>1.9.2</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 
 
@@ -39,21 +39,77 @@
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 
+
 		<!-- webbas 相关包 -->
-		<!--  <dependency>
-			<groupId>com.aspire.webbas</groupId>
-			<artifactId>webbas-common-sessionuser</artifactId>
-			<version>3.2.5.001</version>
+		<!-- <dependency> <groupId>com.aspire.webbas</groupId> <artifactId>webbas-common-sessionuser</artifactId> 
+			<version>3.2.5.001</version> </dependency> <dependency> <groupId>com.aspire.webbas</groupId> 
+			<artifactId>webbas-common-configurer</artifactId> <version>${webbas.version}</version> 
+			</dependency> <dependency> <groupId>com.aspire.webbas</groupId> <artifactId>webbas-support-log-starter</artifactId> 
+			<version>${webbas.version}</version> </dependency> -->
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.12</version>
 		</dependency>
 		<dependency>
-			<groupId>com.aspire.webbas</groupId>
-			<artifactId>webbas-common-configurer</artifactId>
-			<version>${webbas.version}</version>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.1.0.Final</version>
 		</dependency>
 		<dependency>
-            <groupId>com.aspire.webbas</groupId>
-            <artifactId>webbas-support-log-starter</artifactId>
-            <version>${webbas.version}</version>
-        </dependency> -->
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.3.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>javax.el-api</artifactId>
+			<version>2.2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>javax.el</artifactId>
+			<version>2.2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>3.0.3.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.48</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.ibatis/ibatis-sqlmap -->
+		<dependency>
+			<groupId>org.apache.ibatis</groupId>
+			<artifactId>ibatis-sqlmap</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>3.2.16.RELEASE</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
+		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.14.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.76</version>
+		</dependency>
+
 	</dependencies>
 </project>

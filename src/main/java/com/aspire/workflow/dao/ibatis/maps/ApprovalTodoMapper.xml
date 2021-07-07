@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="ApprovalTodoMapper">
+	<typeAlias alias="approvalTodo" type="com.aspire.sims.qm.workflow.domain.ApprovalTodo" />
+
+	<resultMap id="ApprovalTodoMapper_BaseResultMap" class="approvalTodo">
+		<!-- WARNING - @mbg.generated -->
+		<result column="id" jdbcType="VARCHAR" property="id" />
+		<result column="flow_key" jdbcType="VARCHAR" property="flowKey" />
+		<result column="business_id" jdbcType="VARCHAR" property="businessId" />
+		<result column="flow_node" jdbcType="VARCHAR" property="flowNode" />
+		<result column="user_id" jdbcType="VARCHAR" property="userId" />
+		<result column="is_do" jdbcType="INTEGER" property="isDo" />
+		<result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+		<result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="update_user_id" jdbcType="VARCHAR" property="updateUserId" />
+		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+		<result column="deleted" jdbcType="VARCHAR" property="deleted" />
+	</resultMap>
+
+	<update id="done" parameterClass="approvalTodo">
+		UPDATE qm_approval_todo SET is_do ='1', update_time=#updateTime#,
+		update_user_id=#updateUserId#
+		WHERE deleted='0'
+		and flow_key = #flowKey#
+		and business_id=#businessId#
+		and flow_node=#flowNode#
+		and user_id=#userId#
+	</update>
+
+	<update id="deleteOther" parameterClass="approvalTodo">
+		UPDATE qm_approval_todo SET deleted ='1', update_time=#updateTime#,
+		update_user_id=#updateUserId#
+		WHERE flow_key = #flowKey#
+		and business_id=#businessId#
+		<isNotEmpty prepend="and" property="flowNode">
+		  flow_node=#flowNode#
+        </isNotEmpty>
+        <isNotEmpty prepend="and" property="userId">
+		  user_id !=#userId#
+		</isNotEmpty>
+	</update>
+
+	<insert id="insert" parameterClass="approvalTodo">
+		INSERT INTO qm_approval_todo
+		(id, flow_key, business_id, flow_node, user_id,
+		is_do, create_user_id, create_user_name, create_time,update_user_id,update_time, deleted)
+		VALUES(#id#, #flowKey#,
+		#businessId#, #flowNode#,
+		#userId#, #isDo#, #createUserId#, #createUserName#, #createTime#,#updateUserId# ,#updateTime#
+		,#deleted#)
+	</insert>
+
+	<delete id="delete" parameterClass="string">
+		delete FROM qm_approval_todo where id=#id#
+	</delete>
+
+	<select id="get" resultMap="ApprovalTodoMapper_BaseResultMap" parameterClass="String">
+		SELECT id, flow_key, business_id,
+		flow_node, user_id, is_do, create_user_id, create_user_name, create_time, update_user_id, update_time, deleted
+		FROM
+		qm_approval_todo
+		where id= #id#
+	</select>
+    
+    <select id="checkExsitTodo" resultClass="java.lang.Integer" parameterClass="approvalTodo">
+        SELECT count(*)
+        FROM
+        qm_approval_todo
+        WHERE deleted='0' and is_do='0'
+        and flow_key = #flowKey#
+        and business_id=#businessId#
+        <isNotEmpty prepend="and" property="flowNode">
+          flow_node=#flowNode#
+        </isNotEmpty>
+        and user_id=#userId#
+    </select>
+
+</sqlMap>
